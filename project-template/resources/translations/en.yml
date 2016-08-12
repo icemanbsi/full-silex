@@ -1,0 +1,18 @@
+websiteName : Payride
+
+mustExists : %varStr% must not be empty
+mustUnique : %varStr% already exists
+
+errorPasswordEmpty : Password cannot be empty
+errorPasswordConfirmationWrong : Password confirmation mismatch
+errorPasswordMismatch : Email and password mismatch
+errorForgetPasswordEmailNotSent : "There's an error while sendding your recovery link. Please try again later."
+errorUserNotFound : User Not Found
+errorOldPasswordMismatch : Old Password mismatch
+emailPasswordResetSubject : Password Recovery for Your %websiteName% Account
+
+httpCode_200 : OK
+httpCode_400 : Bad Request - Missing some parameters.
+httpCode_401 : You don't have permission to access this feature.
+httpCode_404 : Not Found
+httpCode_500 : We have some problems while processing your request. Please try again later.
