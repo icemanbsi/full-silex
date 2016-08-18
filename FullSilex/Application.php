@@ -134,14 +134,14 @@ class Application extends SilexApplication
 
                 $twig->addFunction(new \Twig_SimpleFunction(
                     'baseUrl',
-                    array('\App\Twig\Functions\UrlFunction', 'baseUrl'),
+                    array('\FullSilex\Twig\Functions\UrlFunction', 'baseUrl'),
                     array(
                         "needs_context" => true
                     )
                 ));
                 $twig->addFunction(new \Twig_SimpleFunction(
                     'publicUrl',
-                    array('\App\Twig\Functions\UrlFunction', 'publicUrl'),
+                    array('\FullSilex\Twig\Functions\UrlFunction', 'publicUrl'),
                     array(
                         "needs_context" => true
                     )
