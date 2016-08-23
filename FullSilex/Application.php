@@ -12,6 +12,7 @@ use Silex\Application as SilexApplication;
 use ActiveRecord\Config as ActiveRecordConfig;
 use Silex\Application\UrlGeneratorTrait;
 use Silex\Provider\MonologServiceProvider;
+use Silex\Provider\SessionServiceProvider;
 use Silex\Provider\SwiftmailerServiceProvider;
 use Silex\Provider\TwigServiceProvider;
 use Symfony\Component\Translation\Loader\YamlFileLoader;
@@ -25,6 +26,7 @@ class Application extends SilexApplication
     protected $useMailer            = true;
     protected $useTranslator        = true;
     protected $useTemplateEngine    = true;
+    protected $useSession           = true;
 
     // need to override
     protected function setControllerProviders(){
@@ -79,8 +81,12 @@ class Application extends SilexApplication
             $this->setupActiveRecord();
         }
 
+        if($this->useSession) {
+            $app->register(new SessionServiceProvider());
+        }
+
 //        $app->register(new HttpCacheServiceProvider());
-//        $app->register(new SessionServiceProvider());
+
 //        $app->register(new ValidatorServiceProvider());
 //        $app->register(new FormServiceProvider());
 //        $app->register(new UrlGeneratorServiceProvider());
@@ -268,5 +274,9 @@ class Application extends SilexApplication
 
     public function log($message){
         $this['monolog']->addDebug($message);
+    }
+
+    public function session(){
+        return $this["session"];
     }
 }
