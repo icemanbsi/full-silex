@@ -17,6 +17,8 @@ class BaseController
     protected $app;
     /** @var Request $request */
     protected $request;
+    /** @var  String $currentAction */
+    protected $currentAction;
 
     public function action(Request $request, FullSilexApplication $app, $method){
         $this->app = $app;
@@ -25,6 +27,8 @@ class BaseController
         if(empty($method)){
             $method = "index";
         }
+
+        $this->currentAction =  $method;
 
         if (method_exists($this, $method)){
             $res = $this->beforeAction();
