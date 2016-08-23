@@ -276,7 +276,7 @@ class Application extends SilexApplication
         $this['monolog']->addDebug($message);
     }
 
-    public function session(){
+    public function getSession(){
         return $this["session"];
     }
 }
