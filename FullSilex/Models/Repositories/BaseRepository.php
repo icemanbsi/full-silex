@@ -6,7 +6,7 @@
  * Time: 4:46 PM
  */
 
-namespace App\Models\Repositories;
+namespace FullSilex\Models\Repositories;
 
 
 class BaseRepository
