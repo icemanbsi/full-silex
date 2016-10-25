@@ -133,7 +133,7 @@ class Application extends SilexApplication
 
         if($this->useTemplateEngine) {
             $app->register(new TwigServiceProvider(), array(
-                'twig.path' => array($this->getRootDir() . '/resources/views'),
+                'twig.path' => $this->setTemplateDirectories(),
             ));
 
             $app->extend('twig', function($twig, $app) {
@@ -199,6 +199,10 @@ class Application extends SilexApplication
         else{
             return null;
         }
+    }
+
+    public function setTemplateDirectories(){
+        return array($this->getRootDir() . '/resources/views');
     }
 
     protected function setupActiveRecord(){

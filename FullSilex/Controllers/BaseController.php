@@ -48,8 +48,53 @@ class BaseController
         return "Method Not Found";
     }
 
+    protected function setDefaultAssign(){
+
+        $classes = explode("\\", get_called_class());
+        $activeMainMenu = lcfirst(str_replace("Controller", "", $classes[count($classes) - 1]));
+
+        return array(
+            'baseUrl' => $this->app->url("homepage"),
+            'publicUrl' => $this->app->url("homepage") . "public/",
+            'clientConfig' => array(
+                'baseUrl' => $this->app->url("homepage"),
+                'publicUrl' => $this->app->url("homepage") . "public/",
+            ),
+            'activeMainMenu' => $activeMainMenu
+        );
+    }
+
+    protected function render($templateName, $assign){
+        $pos = strrpos($templateName,".twig");
+        if($pos == -1 || $pos === false || $pos != strlen($templateName) - 5){
+            $templateName .= ".twig";
+        }
+
+        $paths = explode("/", $templateName);
+        if(count($paths) == 1) {
+
+            $classes = explode("\\", get_called_class());
+            $classes[count($classes) - 1] = str_replace("Controller", "", $classes[count($classes) - 1]);
+            if(count($classes) > 2) {
+                unset($classes[0]);
+                unset($classes[1]);
+            }
+
+            $templateName = strtolower(implode("/", $classes)) . "/" . $templateName;
+
+        }
+
+        $assign = array_merge($this->setDefaultAssign(), $this->setAdditionalAssign(), $assign);
+
+        return $this->app->getTemplateEngine()->render($templateName, $assign);
+    }
+
     //Overrides Methods
     protected function beforeAction(){
         return "";
+    }
+
+    protected function setAdditionalAssign(){
+        return array();
     }
 }

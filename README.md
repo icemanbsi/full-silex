@@ -8,7 +8,7 @@ Full Silex is the a fast track to build a full stack framework based on the amaz
 
 #### 1. Add full-stack as a required library in your composer project
 ```
-composer require icemanbsi/full-stack
+composer require icemanbsi/full-silex
 ```
 
 #### 2. Prepare the project
