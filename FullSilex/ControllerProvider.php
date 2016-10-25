@@ -23,17 +23,13 @@ class ControllerProvider implements ControllerProviderInterface
         EXAMPLE :
         --------------------
         $controllers
-            ->match('/users/{method}', 'App\\Controllers\\Api\\UsersController::action')
-            ->method('GET|POST');
+            ->match('/users/{method}', 'App\\Controllers\\UsersController::action')
+            ->method('GET|POST')
+            ->bind('users');
         $controllers
-            ->match('/campaigns/{method}', 'App\\Controllers\\Api\\CampaignsController::action')
-            ->method('GET|POST');
-        $controllers
-            ->match('/workshops/{method}', 'App\\Controllers\\Api\\WorkshopsController::action')
-            ->method('GET|POST');
-        $controllers
-            ->match('/utilities/{method}', 'App\\Controllers\\Api\\UtilitiesController::action')
-            ->method('GET|POST');
+            ->match('/products/{method}', 'App\\Controllers\\SomeDirectory\\ProductsController::action')
+            ->method('GET|POST')
+            ->bind('someDirectory/products');
         */
     }
     //--- end of method to override

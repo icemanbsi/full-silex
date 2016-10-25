@@ -20,7 +20,7 @@ class BaseController
     /** @var  String $currentAction */
     protected $currentAction;
 
-    public function action(Request $request, FullSilexApplication $app, $method){
+    public function action(Request $request, FullSilexApplication $app, $method = ""){
         $this->app = $app;
         $this->request = $request;
 
@@ -64,7 +64,7 @@ class BaseController
         );
     }
 
-    protected function render($templateName, $assign){
+    protected function render($templateName, $assign = array()){
         $pos = strrpos($templateName,".twig");
         if($pos == -1 || $pos === false || $pos != strlen($templateName) - 5){
             $templateName .= ".twig";
