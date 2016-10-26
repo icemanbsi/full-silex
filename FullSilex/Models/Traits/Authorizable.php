@@ -6,7 +6,7 @@
  * Date: 7/21/16
  * Time: 10:55 AM
  */
-namespace App\Models\Traits;
+namespace FullSilex\Models\Traits;
 
 use FullSilex\Helpers\UtilitiesHelper;
 
