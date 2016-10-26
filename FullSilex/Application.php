@@ -235,6 +235,7 @@ class Application extends SilexApplication
         }
 
         $cfg->set_default_connection($env);
+        \ActiveRecord\Connection::$datetime_format = 'Y-m-d H:i:s';
     }
 
     /**
