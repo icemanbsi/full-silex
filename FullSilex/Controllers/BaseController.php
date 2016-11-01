@@ -91,6 +91,14 @@ class BaseController
         return $this->app->getTemplateEngine()->render($templateName, $assign);
     }
 
+    public function setMessage($message, $as = 'message') {
+        $_SESSION[$as] = $message;
+    }
+
+    public function getMessage($as = 'message'){
+        return $_SESSION[$as];
+    }
+
     //Overrides Methods
     protected function beforeAction(){
         return "";

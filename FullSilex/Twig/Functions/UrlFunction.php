@@ -17,14 +17,15 @@ class UrlFunction
         if(empty($string)){
             $string = "homepage";
         }
-        $paths = explode("/", $string);
-        if(count($paths) > 1) {
-            $params["method"] = array_pop($paths);
-            $route = implode("/", $paths);
+        $route = $string;
+        if(empty($params["method"])) {
+            $paths = explode("/", $string);
+            if (count($paths) > 1) {
+                $params["method"] = array_pop($paths);
+                $route = implode("/", $paths);
+            }
         }
-        else{
-            $route = $string;
-        }
+
         return $app->url($route, $params);
     }
 

@@ -77,4 +77,8 @@ class BaseModel extends Model
         //    $this->errors->add('last_name', "can't be the same as First Name");
         //}
     }
+
+    public function errorMessages($glue = '\n'){
+        return implode($glue, $this->errors->full_messages());
+    }
 }

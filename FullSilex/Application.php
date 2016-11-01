@@ -262,7 +262,12 @@ class Application extends SilexApplication
      * @return \App\Models\BaseModel
      */
     public function createModel($modelName, $attributes = array()){
-        $completeModelName = 'App\Models\\' . ucfirst($modelName);
+        if(strpos($modelName, "\\") == -1) {
+            $completeModelName = 'App\Models\\' . ucfirst($modelName);
+        }
+        else {
+            $completeModelName = $modelName;
+        }
         /** @var \App\Models\BaseModel $model */
         $model = new $completeModelName($attributes);
         $model->setApp($this);
