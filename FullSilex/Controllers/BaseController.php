@@ -96,7 +96,13 @@ class BaseController
     }
 
     public function getMessage($as = 'message'){
-        return $_SESSION[$as];
+        return isset($_SESSION[$as]) ? $_SESSION[$as] : "";
+    }
+
+    public function showMessage($as = 'message') {
+        $message = $this->getMessage($as);
+        unset($_SESSION[$as]);
+        return $message;
     }
 
     //Overrides Methods

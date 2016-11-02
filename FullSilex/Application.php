@@ -21,6 +21,8 @@ class Application extends SilexApplication
 {
     use SilexApplication\TranslationTrait, UrlGeneratorTrait;
 
+    protected static $_instance     = null;
+
     // OPTIONS
     protected $useDatabase          = true;
     protected $useMailer            = true;
@@ -62,6 +64,8 @@ class Application extends SilexApplication
 
     public function __construct($env)
     {
+        self::$_instance = $this;
+
         $this->env = $env;
 
         parent::__construct();
@@ -182,6 +186,10 @@ class Application extends SilexApplication
         $this->setControllerProviders();
     }
 
+    public static function getInstance(){
+        return self::$_instance;
+    }
+
     public function getRootDir()
     {
         return BASEPATH;
@@ -262,7 +270,7 @@ class Application extends SilexApplication
      * @return \App\Models\BaseModel
      */
     public function createModel($modelName, $attributes = array()){
-        if(strpos($modelName, "\\") == -1) {
+        if(strpos($modelName, '\\') === false) {
             $completeModelName = 'App\Models\\' . ucfirst($modelName);
         }
         else {

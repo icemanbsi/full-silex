@@ -9,6 +9,7 @@
 namespace FullSilex\Models;
 
 use ActiveRecord\Model;
+use FullSilex\Application;
 
 class BaseModel extends Model
 {
@@ -18,6 +19,12 @@ class BaseModel extends Model
 
     /** @var  \FullSilex\Application $app */
     protected $app;
+
+    public function __construct(array $attributes=array(), $guard_attributes=true, $instantiating_via_find=false, $new_record=true) {
+        parent::__construct($attributes, $guard_attributes, $instantiating_via_find, $new_record);
+
+        $this->setApp(Application::getInstance());
+    }
 
     public function setApp($app){
         $this->app = $app;
