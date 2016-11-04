@@ -1,7 +1,6 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: Trio-1602
+ * Created by Bobby Stenly Irawan (http://bobbystenly.com)
  * Date: 7/19/16
  * Time: 10:25 AM
  */
@@ -9,6 +8,7 @@
 namespace FullSilex\Models;
 
 use ActiveRecord\Model;
+use FullSilex\Application;
 
 class BaseModel extends Model
 {
@@ -18,6 +18,12 @@ class BaseModel extends Model
 
     /** @var  \FullSilex\Application $app */
     protected $app;
+
+    public function __construct(array $attributes=array(), $guard_attributes=true, $instantiating_via_find=false, $new_record=true) {
+        parent::__construct($attributes, $guard_attributes, $instantiating_via_find, $new_record);
+
+        $this->setApp(Application::getInstance());
+    }
 
     public function setApp($app){
         $this->app = $app;
@@ -76,5 +82,9 @@ class BaseModel extends Model
         //    $this->errors->add('first_name', "can't be the same as Last Name");
         //    $this->errors->add('last_name', "can't be the same as First Name");
         //}
+    }
+
+    public function errorMessages($glue = '\n'){
+        return implode($glue, $this->errors->full_messages());
     }
 }

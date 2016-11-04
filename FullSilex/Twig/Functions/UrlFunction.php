@@ -1,7 +1,6 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: Trio-1602
+ * Created by Bobby Stenly Irawan (http://bobbystenly.com)
  * Date: 8/12/16
  * Time: 11:51 AM
  */
@@ -17,14 +16,15 @@ class UrlFunction
         if(empty($string)){
             $string = "homepage";
         }
-        $paths = explode("/", $string);
-        if(count($paths) > 1) {
-            $params["method"] = array_pop($paths);
-            $route = implode("/", $paths);
+        $route = $string;
+        if(empty($params["method"])) {
+            $paths = explode("/", $string);
+            if (count($paths) > 1) {
+                $params["method"] = array_pop($paths);
+                $route = implode("/", $paths);
+            }
         }
-        else{
-            $route = $string;
-        }
+
         return $app->url($route, $params);
     }
 

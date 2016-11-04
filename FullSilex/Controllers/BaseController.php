@@ -1,7 +1,6 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: Trio-1602
+ * Created by Bobby Stenly Irawan (http://bobbystenly.com)
  * Date: 7/19/16
  * Time: 10:30 AM
  */
@@ -89,6 +88,20 @@ class BaseController
         $assign = array_merge($this->setDefaultAssign(), $this->setAdditionalAssign(), $assign);
 
         return $this->app->getTemplateEngine()->render($templateName, $assign);
+    }
+
+    public function setMessage($message, $as = 'message') {
+        $_SESSION[$as] = $message;
+    }
+
+    public function getMessage($as = 'message'){
+        return isset($_SESSION[$as]) ? $_SESSION[$as] : "";
+    }
+
+    public function showMessage($as = 'message') {
+        $message = $this->getMessage($as);
+        unset($_SESSION[$as]);
+        return $message;
     }
 
     //Overrides Methods

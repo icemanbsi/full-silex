@@ -1,7 +1,6 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: Trio-1602
+ * Created by Bobby Stenly Irawan (http://bobbystenly.com)
  * Date: 7/15/16
  * Time: 10:31 AM
  */
@@ -20,6 +19,8 @@ use Symfony\Component\Translation\Loader\YamlFileLoader;
 class Application extends SilexApplication
 {
     use SilexApplication\TranslationTrait, UrlGeneratorTrait;
+
+    protected static $_instance     = null;
 
     // OPTIONS
     protected $useDatabase          = true;
@@ -62,6 +63,8 @@ class Application extends SilexApplication
 
     public function __construct($env)
     {
+        self::$_instance = $this;
+
         $this->env = $env;
 
         parent::__construct();
@@ -182,6 +185,10 @@ class Application extends SilexApplication
         $this->setControllerProviders();
     }
 
+    public static function getInstance(){
+        return self::$_instance;
+    }
+
     public function getRootDir()
     {
         return BASEPATH;
@@ -262,7 +269,12 @@ class Application extends SilexApplication
      * @return \App\Models\BaseModel
      */
     public function createModel($modelName, $attributes = array()){
-        $completeModelName = 'App\Models\\' . ucfirst($modelName);
+        if(strpos($modelName, '\\') === false) {
+            $completeModelName = 'App\Models\\' . ucfirst($modelName);
+        }
+        else {
+            $completeModelName = $modelName;
+        }
         /** @var \App\Models\BaseModel $model */
         $model = new $completeModelName($attributes);
         $model->setApp($this);
