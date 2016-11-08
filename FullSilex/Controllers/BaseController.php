@@ -61,7 +61,9 @@ class BaseController
                 'baseUrl' => $this->app->url("homepage"),
                 'publicUrl' => $this->app->url("homepage") . "public/",
             ),
-            'activeMainMenu' => $activeMainMenu
+            'activeMainMenu' => $activeMainMenu,
+            'languages' => $this->app->config("languages"),
+            'language' => $this->app->getLanguage()
         );
     }
 

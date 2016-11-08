@@ -155,6 +155,15 @@ class Application extends SilexApplication
                         "needs_context" => true
                     )
                 ));
+                if($this->useTranslator) {
+                    $twig->addFilter(new \Twig_SimpleFilter(
+                        'modelTranslator',
+                        array('\FullSilex\Twig\Filters\TranslatorFilter', 'modelTranslator'),
+                        array(
+                            "needs_context" => true
+                        )
+                    ));
+                }
 
                 foreach($this->additionalTwigFilter() as $filter){
                     $twig->addFilter($filter);
@@ -299,5 +308,13 @@ class Application extends SilexApplication
 
     public function isAjax(){
         return isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest';
+    }
+
+    public function getLanguage(){
+        if(empty($_SESSION["_lang"])){
+            $_SESSION["_lang"] = $this->config("defaultLanguage");
+        }
+
+        return $_SESSION["_lang"];
     }
 }

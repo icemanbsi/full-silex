@@ -13,6 +13,12 @@ $_config = array(
 
     'dateFormatDb' => 'Y-m-d',
 
+    'languages' => array(
+        "en" => "English",
+//        "id" => "Indonesia"
+    ),
+    'defaultLanguage' => "en",
+
     'dbConfig' => array(
         'type' => 'mysql', // or pgsql
         'host' => '127.0.0.1',

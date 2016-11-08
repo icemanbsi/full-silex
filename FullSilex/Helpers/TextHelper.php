@@ -18,4 +18,26 @@ class TextHelper
         }
         return ucfirst(implode(' ', $ret));
     }
+
+    public static function isJson($string)
+    {
+        try {
+            $json = json_decode($string, true);
+            return !empty($json) && is_array($json);
+        }
+        catch (\Exception $e) {
+            return false;
+        }
+    }
+
+    public static function modelTranslator($json, $lang){
+        if (TextHelper::isJson($json)) {
+            $array = json_decode($json, true);
+            return $array[$lang];
+        }
+        else {
+            return $json;
+        }
+    }
+
 }
