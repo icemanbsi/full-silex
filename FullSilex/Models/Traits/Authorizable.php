@@ -11,6 +11,8 @@ use FullSilex\Helpers\UtilitiesHelper;
 
 trait Authorizable
 {
+    // BEFORE SAVE : auth_beforeSave
+
     protected $password;
     protected $password_confirmation;
     protected $minPasswordLength = 6;

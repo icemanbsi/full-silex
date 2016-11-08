@@ -1,7 +1,6 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: Trio-1602
+ * Created by Bobby Stenly Irawan (http://bobbystenly.com).
  * Date: 11/8/16
  * Time: 1:45 PM
  */
@@ -11,6 +10,8 @@ namespace FullSilex\Models\Traits;
 
 trait HasPosition
 {
+    // BEFORE CREATE : pos_beforeCreate
+
     public function pos_beforeCreate()
     {
         if (is_null($this->position)) {

@@ -207,6 +207,10 @@ class Application extends SilexApplication
         return BASEPATH;
     }
 
+    public function getPublicDirectory(){
+        return 'public';
+    }
+
     public function getEnv()
     {
         return $this->env;

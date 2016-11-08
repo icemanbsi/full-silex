@@ -10,6 +10,9 @@ namespace FullSilex\Models\Traits;
 
 trait HasTimestamp
 {
+    // BEFORE CREATE : time_beforeCreate
+    // BEFORE SAVE : time_beforeSave
+
     public function time_beforeCreate()
     {
         $this->created_at = date("Y-m-d H:i:s");
