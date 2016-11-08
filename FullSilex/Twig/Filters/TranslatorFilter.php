@@ -16,8 +16,8 @@ class TranslatorFilter
         /** @var \App\Application $app */
         $app = $context['app'];
 
-        if(!empty($params["language"])){
-            $lang = $params["language"];
+        if(!empty($params[0])){
+            $lang = $params[0];
         }
         else{
             $lang = $app->getLanguage();
