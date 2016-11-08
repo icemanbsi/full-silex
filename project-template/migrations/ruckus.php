@@ -49,6 +49,7 @@ $db_config["db"]["development"]["port"]         = $_config["dbConfig"]["port"];
 $db_config["db"]["development"]["database"]     = $_config["dbConfig"]["dbName"];
 $db_config["db"]["development"]["user"]         = $_config["dbConfig"]["username"];
 $db_config["db"]["development"]["password"]     = $_config["dbConfig"]["password"];
+$db_config["db"]["development"]["directory"]    = $_config["dbConfig"]["directory"];
 
 $db_config["db_dir"] = RUCKUSING_WORKING_BASE . DIRECTORY_SEPARATOR . 'migrations' . DIRECTORY_SEPARATOR . $_config["dbConfig"]["directory"];
 
