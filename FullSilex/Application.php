@@ -57,6 +57,10 @@ class Application extends SilexApplication
         );
     }
 
+    protected function getSMTPConfig(){
+        return $this->config("smtp");
+    }
+
     protected $env;
     protected $config = array();
     protected $repositories = array();
@@ -180,7 +184,7 @@ class Application extends SilexApplication
 
         if ($this->useMailer) {
             $app->register(new SwiftmailerServiceProvider());
-            $smtpConfig = $this->config("smtp");
+            $smtpConfig = $this->getSMTPConfig();
             $app['swiftmailer.options'] = array(
                 'host' => $smtpConfig['host'],
                 'port' => $smtpConfig['port'],
