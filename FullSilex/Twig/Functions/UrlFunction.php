@@ -10,7 +10,7 @@ namespace FullSilex\Twig\Functions;
 
 class UrlFunction
 {
-    public static function baseUrl($context, $string, $params = array()){
+    public static function baseUrl($context, $string = "", $params = array()){
         /** @var \App\Application $app */
         $app = $context['app'];
         if(empty($string)){
@@ -28,7 +28,7 @@ class UrlFunction
         return $app->url($route, $params);
     }
 
-    public static function publicUrl($context, $string, $params = array()){
+    public static function publicUrl($context, $string = "", $params = array()){
         /** @var \App\Application $app */
         $app = $context['app'];
         return $app->url("homepage") . "public/" . $string . "?" . http_build_query($params);
