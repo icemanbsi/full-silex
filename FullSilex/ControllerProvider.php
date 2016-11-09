@@ -29,6 +29,12 @@ class ControllerProvider implements ControllerProviderInterface
             ->match('/products/{method}', 'App\\Controllers\\SomeDirectory\\ProductsController::action')
             ->method('GET|POST')
             ->bind('someDirectory/products');
+
+        //to use translation, you can add the locale name inside your url with {_locale}
+        $controllers
+            ->match('/{_locale}/products/{method}', 'App\\Controllers\\SomeDirectory\\ProductsController::action')
+            ->method('GET|POST')
+            ->bind('someDirectory/products');
         */
     }
     //--- end of method to override

@@ -32,6 +32,7 @@ class BaseController
         $this->currentAction =  $method;
 
         if (method_exists($this, $method)){
+            $this->setLanguageFile();
             $res = $this->beforeAction();
             if(empty($res)) {
                 return $this->$method();
@@ -82,8 +83,10 @@ class BaseController
                 unset($classes[0]);
                 unset($classes[1]);
             }
-
-            $templateName = strtolower(implode("/", $classes)) . "/" . $templateName;
+            foreach($classes as $i=>$val){
+                $classes[$i] = lcfirst($val);
+            }
+            $templateName = implode("/", $classes) . "/" . $templateName;
 
         }
 
@@ -92,18 +95,49 @@ class BaseController
         return $this->app->getTemplateEngine()->render($templateName, $assign);
     }
 
-    public function setMessage($message, $as = 'message') {
+    protected function setMessage($message, $as = 'message') {
         $_SESSION[$as] = $message;
     }
 
-    public function getMessage($as = 'message'){
+    protected function getMessage($as = 'message'){
         return isset($_SESSION[$as]) ? $_SESSION[$as] : "";
     }
 
-    public function showMessage($as = 'message') {
+    protected function showMessage($as = 'message') {
         $message = $this->getMessage($as);
         unset($_SESSION[$as]);
         return $message;
+    }
+
+    protected function setLanguageFile(){
+        if($this->app->isUseTranslator()) {
+            $this->app->setLanguage($this->request->getLocale());
+            $this->setDefaultLanguageFile();
+            $this->setControllerLanguageFile();
+        }
+    }
+
+    protected function setDefaultLanguageFile()
+    {
+        $this->app->addLanguageFile("common", $this->app->getLanguage());
+    }
+
+    protected function setControllerLanguageFile(){
+        $classes = explode("\\", get_called_class());
+        $className = str_replace("Controller", "", $classes[count($classes) - 1]);
+        $classes[count($classes) - 1] = $className;
+        if(count($classes) > 2) {
+            unset($classes[0]);
+            unset($classes[1]);
+        }
+        foreach($classes as $i=>$val){
+            $classes[$i] = lcfirst($val);
+        }
+        $this->app->addLanguageFile(implode("/", $classes) . "/" . $className, $this->app->getLanguage());
+
+
+        //action specific lang
+        $this->app->addLanguageFile(implode("/", $classes) . "/" . $this->currentAction, $this->app->getLanguage());
     }
 
     //Overrides Methods

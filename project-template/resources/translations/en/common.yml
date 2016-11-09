@@ -1,4 +1,4 @@
-websiteName : Payride
+websiteName : Website Name
 
 mustExists : %varStr% must not be empty
 mustUnique : %varStr% already exists

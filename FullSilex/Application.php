@@ -123,12 +123,10 @@ class Application extends SilexApplication
         if ($this->useTranslator) {
             $app->register(new \Silex\Provider\LocaleServiceProvider());
             $app->register(new \Silex\Provider\TranslationServiceProvider(), array(
-                'locale_fallbacks' => array('en'),
+                'locale_fallbacks' => array($this->config("defaultLanguage")),
             ));
             $app->extend('translator', function ($translator, $app) {
                 $translator->addLoader('yaml', new YamlFileLoader());
-                $translator->addResource('yaml', $this->getRootDir() . '/resources/translations/en.yml', 'en');
-
                 return $translator;
             });
         }
@@ -196,6 +194,22 @@ class Application extends SilexApplication
         }
 
         $this->setControllerProviders();
+    }
+
+    public function isUseDatabase(){
+        return $this->useDatabase;
+    }
+    public function isUseMailer(){
+        return $this->useMailer;
+    }
+    public function isUseTranslator(){
+        return $this->useTranslator;
+    }
+    public function isUseTemplateEngine(){
+        return $this->useTemplateEngine;
+    }
+    public function isUseSession(){
+        return $this->useSession;
     }
 
     public static function getInstance(){
@@ -306,6 +320,10 @@ class Application extends SilexApplication
         return $this['mailer'];
     }
 
+    public function getTranslator(){
+        return $this['translator'];
+    }
+
     public function log($message){
         $this['monolog']->addDebug($message);
     }
@@ -324,5 +342,17 @@ class Application extends SilexApplication
         }
 
         return $_SESSION["_lang"];
+    }
+
+    public function setLanguage($lang){
+        $this->getTranslator()->setLocale($lang);
+        $_SESSION["_lang"] = $lang;
+    }
+
+    public function addLanguageFile($path, $lang){
+        $filePath = $this->getRootDir() . '/resources/translations/' . $this->getLanguage() . '/'. $path . '.yml';
+        if(file_exists($filePath)) {
+            $this->getTranslator()->addResource('yaml', $filePath, $lang);
+        }
     }
 }
