@@ -12,14 +12,11 @@ use FullSilex\Helpers\TextHelper;
 
 class TranslatorFilter
 {
-    public static function modelTranslator($context, $string, $params = array()){
+    public static function modelTranslator($context, $string, $lang = ""){
         /** @var \App\Application $app */
         $app = $context['app'];
 
-        if(!empty($params[0])){
-            $lang = $params[0];
-        }
-        else{
+        if(empty($lang)){
             $lang = $app->getLanguage();
         }
 
