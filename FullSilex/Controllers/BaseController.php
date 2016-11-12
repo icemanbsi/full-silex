@@ -133,11 +133,11 @@ class BaseController
         foreach($classes as $i=>$val){
             $classes[$i] = lcfirst($val);
         }
-        $this->app->addLanguageFile(implode("/", $classes) . "/" . $className, $this->app->getLanguage());
+        $this->app->addLanguageFile(implode("/", $classes) . "/" . lcfirst($className), $this->app->getLanguage());
 
 
         //action specific lang
-        $this->app->addLanguageFile(implode("/", $classes) . "/" . $this->currentAction, $this->app->getLanguage());
+        $this->app->addLanguageFile(implode("/", $classes) . "/" . lcfirst($this->currentAction), $this->app->getLanguage());
     }
 
     //Overrides Methods
