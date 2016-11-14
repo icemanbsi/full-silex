@@ -22,4 +22,14 @@ class UtilitiesHelper
     public static function toHash($password, $salt, $globalSalt) {
         return md5($password . $salt . $globalSalt);
     }
+
+    // Change "false" or "0" or '' to false, others to true (yes, -1 is true, see http://stackoverflow.com/questions/137487/null-vs-false-vs-0-in-php).
+    public static function toBoolean($status) {
+        if (in_array($status, array('', '0', 'false', 0, false, null), true)) {
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
 }

@@ -355,4 +355,20 @@ class Application extends SilexApplication
             $this->getTranslator()->addResource('yaml', $filePath, $lang);
         }
     }
+
+    public function getBasePath(){
+        return BASEPATH . DIRECTORY_SEPARATOR;
+    }
+
+    public function getPublicBasePath(){
+        return BASEPATH . DIRECTORY_SEPARATOR . $this->getPublicDirectory() . DIRECTORY_SEPARATOR;
+    }
+
+    public function getBaseUrl(){
+        return $this->url("homepage") . "/";
+    }
+
+    public function getPublicBaseUrl(){
+        return $this->url("homepage") . "/" . $this->getPublicDirectory() . "/";
+    }
 }
