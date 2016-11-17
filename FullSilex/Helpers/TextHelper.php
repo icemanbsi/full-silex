@@ -33,7 +33,7 @@ class TextHelper
     public static function modelTranslator($json, $lang){
         if (TextHelper::isJson($json)) {
             $array = json_decode($json, true);
-            return $array[$lang];
+            return isset($array[$lang]) ? $array[$lang] : "";
         }
         else {
             return $json;
