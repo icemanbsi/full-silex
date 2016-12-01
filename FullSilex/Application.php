@@ -132,7 +132,8 @@ class Application extends SilexApplication
         }
 
         $app->register(new MonologServiceProvider(), array(
-            'monolog.logfile' => $this->getRootDir() . '/logs/' . $this->getEnv() . '.log'
+            'monolog.logfile' => $this->getRootDir() . '/logs/' . $this->getEnv() . '.log',
+            'monolog.level' => $app["debug"] ? "DEBUG" : "ERROR"
         ));
 
 
