@@ -40,7 +40,7 @@ if (preg_match('/\.css|\.js|\.jpg|\.png|\.gif|\.map|\.ttf|\.woff|\.woff2$/', $_S
     $path = __DIR__ . $_SERVER['SCRIPT_NAME'];
     if (is_file($path)) {
         header("Content-Type: {$mimeTypes[$match[0]]}");
-        require $path;
+        echo file_get_contents($path);
         exit;
     }
 }
