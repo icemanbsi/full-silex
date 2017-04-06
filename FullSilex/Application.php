@@ -132,7 +132,8 @@ class Application extends SilexApplication
         }
 
         $app->register(new MonologServiceProvider(), array(
-            'monolog.logfile' => $this->getRootDir() . '/logs/' . $this->getEnv() . '.log'
+            'monolog.logfile' => $this->getRootDir() . '/logs/' . $this->getEnv() . '.log',
+            'monolog.level' => $app["debug"] ? "DEBUG" : "ERROR"
         ));
 
 
@@ -365,10 +366,14 @@ class Application extends SilexApplication
     }
 
     public function getBaseUrl(){
-        return $this->url("homepage") . "/";
+        $url = $this->url("homepage");
+        if(strrpos($url, "/") != strlen($url) - 1) { $url .= "/"; }
+        return $url;
     }
 
     public function getPublicBaseUrl(){
-        return $this->url("homepage") . "/" . $this->getPublicDirectory() . "/";
+        $url = $this->url("homepage");
+        if(strrpos($url, "/") != strlen($url) - 1) { $url .= "/"; }
+        return $url . $this->getPublicDirectory() . "/";
     }
 }
