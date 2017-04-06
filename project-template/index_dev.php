@@ -26,7 +26,7 @@ function startApp(){
 }
 
 //router
-if (preg_match('/\.css|\.js|\.jpg|\.png|\.gif|\.map|\.ttf|\.woff|\.woff2\.svg/', $_SERVER['REQUEST_URI'], $match)) {
+if (preg_match('/\.css|\.js|\.jpg|\.png|\.gif|\.map|\.ttf|\.woff|\.woff2|\.svg/', $_SERVER['REQUEST_URI'], $match)) {
     $mimeTypes = [
         '.css'  => 'text/css',
         '.js'   => 'application/javascript',
