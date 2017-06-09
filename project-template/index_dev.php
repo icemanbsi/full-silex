@@ -26,16 +26,17 @@ function startApp(){
 }
 
 //router
-if (preg_match('/\.css|\.js|\.jpg|\.png|\.gif|\.map|\.ttf|\.woff|\.woff2$/', $_SERVER['REQUEST_URI'], $match)) {
+if (preg_match('/\.css|\.js|\.jpg|\.png|\.gif|\.map|\.ttf|\.woff|\.woff2|\.svg/', $_SERVER['REQUEST_URI'], $match)) {
     $mimeTypes = [
-        '.css' => 'text/css',
-        '.js'  => 'application/javascript',
-        '.jpg' => 'image/jpg',
-        '.png' => 'image/png',
+        '.css'  => 'text/css',
+        '.js'   => 'application/javascript',
+        '.jpg'  => 'image/jpg',
+        '.png'  => 'image/png',
         '.woff' => 'application/font-woff',
-        '.ttf' => 'application/font-sfnt',
-        '.svg' => 'image/svg+xml',
-        '.map' => 'application/json'
+        '.woff2'=> 'application/font-woff2',
+        '.ttf'  => 'application/font-sfnt',
+        '.svg'  => 'image/svg+xml',
+        '.map'  => 'application/json'
     ];
     $path = __DIR__ . $_SERVER['SCRIPT_NAME'];
     if (is_file($path)) {
