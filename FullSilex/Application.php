@@ -325,8 +325,13 @@ class Application extends SilexApplication
         return $this['translator'];
     }
 
-    public function log($message){
-        $this['monolog']->addDebug($message);
+    public function log($message, $isError=false){
+        if($isError){
+            $this['monolog']->error($message);
+        }
+        else {
+            $this['monolog']->debug($message);
+        }
     }
 
     public function getSession(){

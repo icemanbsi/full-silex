@@ -31,6 +31,6 @@ class UrlFunction
     public static function publicUrl($context, $string = "", $params = array()){
         /** @var \App\Application $app */
         $app = $context['app'];
-        return $app->url("homepage") . "public/" . $string . "?" . http_build_query($params);
+        return $app->url("homepage") . "public/" . $string . (!empty($params) ? "?" . http_build_query($params) : "");
     }
 }
