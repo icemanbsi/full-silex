@@ -23,6 +23,8 @@ trait Authorizable
     public function setPassword($password)
     {
         $this->password = $password;
+        $this->flag_dirty("password_hash");
+        $this->flag_dirty("salt");
     }
 
     /**
