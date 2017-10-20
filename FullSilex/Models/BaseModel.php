@@ -19,10 +19,15 @@ class BaseModel extends Model
     /** @var  \FullSilex\Application $app */
     protected $app;
 
+    // Original Attributes
+    protected $_old;
+
     public function __construct(array $attributes=array(), $guard_attributes=true, $instantiating_via_find=false, $new_record=true) {
         parent::__construct($attributes, $guard_attributes, $instantiating_via_find, $new_record);
 
         $this->setApp(Application::getInstance());
+
+        $this->_old = $attributes;
     }
 
     public function setApp($app){
