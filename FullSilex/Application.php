@@ -14,6 +14,8 @@ use Silex\Provider\MonologServiceProvider;
 use Silex\Provider\SessionServiceProvider;
 use Silex\Provider\SwiftmailerServiceProvider;
 use Silex\Provider\TwigServiceProvider;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Translation\Loader\YamlFileLoader;
 
 class Application extends SilexApplication
@@ -193,6 +195,10 @@ class Application extends SilexApplication
                 'auth_mode' => $smtpConfig['auth_mode']
             );
         }
+
+        $app->error(function (\Exception $e, Request $request, $code) {
+            return $this->errorHandler($code);
+        });
 
         $this->setControllerProviders();
     }
@@ -380,5 +386,20 @@ class Application extends SilexApplication
         $url = $this->url("homepage");
         if(strrpos($url, "/") != strlen($url) - 1) { $url .= "/"; }
         return $url . $this->getPublicDirectory() . "/";
+    }
+
+    protected function redirectNotFound(){
+        return $this->redirect($this->url("home", array("method" => "notFound")));
+    }
+
+    protected function errorHandler($code){
+        switch ($code) {
+            case 404:
+                return $this->redirectNotFound();
+            default:
+                $message = 'We are sorry, but something went terribly wrong.';
+        }
+
+        return new Response($message);
     }
 }
