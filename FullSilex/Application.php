@@ -197,7 +197,7 @@ class Application extends SilexApplication
         }
 
         $app->error(function (\Exception $e, Request $request, $code) {
-            return $this->errorHandler($code);
+            return $this->errorHandler($e, $request, $code);
         });
 
         $this->setControllerProviders();
@@ -392,7 +392,7 @@ class Application extends SilexApplication
         return $this->redirect($this->url("home", array("method" => "notFound")));
     }
 
-    protected function errorHandler($code){
+    protected function errorHandler(\Exception $e, Request $request, $code){
         switch ($code) {
             case 404:
                 return $this->redirectNotFound();
