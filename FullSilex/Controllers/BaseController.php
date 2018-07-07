@@ -20,10 +20,6 @@ class BaseController
     protected $currentAction;
 
     public function action(Request $request, FullSilexApplication $app, $method = ""){
-        if (session_status() == PHP_SESSION_NONE) {
-            session_start();
-        }
-
         $this->app = $app;
         $this->request = $request;
 
